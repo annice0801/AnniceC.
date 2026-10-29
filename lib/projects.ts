@@ -152,7 +152,7 @@ const allProjects: Project[] = [
       {
         src: "/shots/offermate-mobile.png",
         title: "手機版",
-        caption: "手機版隱藏設定頁的說明清單，讓表單更早出現在畫面上。",
+        caption: "手機版頁首只留金鑰、登入與選單，「開始模擬面試」收進選單；首頁的大按鈕直接帶到面試設定。",
         device: "mobile",
       },
     ],
