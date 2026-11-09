@@ -90,6 +90,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                   GitHub 原始碼 ↗
                 </a>
               )}
+              <Link href={`/projects/${p.slug}/prd`} className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium hover:border-ink">
+                產品需求文件 PRD →
+              </Link>
               <a href="#issues" className="rounded-full border border-ink/25 px-6 py-3 text-sm font-medium hover:border-ink">
                 直接看問題與解法 ↓
               </a>
@@ -125,6 +128,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 {s.label}
               </a>
               ))}
+            <Link href={`/projects/${p.slug}/prd`} className="mt-4 block border-l py-1.5 pl-4 font-medium hover:text-ink" style={{ borderColor: p.accent, color: p.accent }}>
+              PRD 產品需求文件 →
+            </Link>
           </nav>
         </aside>
 

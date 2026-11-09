@@ -9,7 +9,7 @@ export function SiteHeader() {
   // 視角切換只影響首頁的作品卡片，其他頁面不顯示
   const home = usePathname() === "/";
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur print:hidden">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link href="/" className="shrink-0 font-serif text-lg font-semibold tracking-tight">
           {site.name}

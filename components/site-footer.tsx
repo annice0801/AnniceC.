@@ -2,7 +2,7 @@ import { site } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer id="contact" className="bg-ink text-paper">
+    <footer id="contact" className="bg-ink text-paper print:hidden">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr] md:py-20">
         <div>
           <p className="font-mono text-xs tracking-[0.25em] text-paper/50">CONTACT</p>

@@ -172,7 +172,7 @@ const allProjects: Project[] = [
       api: "OpenAI Responses API（web_search 工具）、Google OAuth、自建 /api/interview 與 /api/admin",
       ui: "Tailwind CSS、Lucide 圖示、手寫 SVG 雷達圖與統計圖",
       logic: "Next.js 16 App Router、Route Handlers、jose 簽發 JWT",
-      memory: "MongoDB Atlas（練習紀錄、用量事件、操作紀錄）、瀏覽器 localStorage（使用者金鑰）",
+      memory: "MongoDB Atlas（會員、用量事件、操作紀錄）、瀏覽器 localStorage（使用者金鑰）；面試對話只保存在頁面狀態，伺服器不存回答內容",
     },
     arch: [
       { title: "使用者端", nodes: [{ name: "React 介面", note: "設定 → 面試 → 診斷書" }, { name: "localStorage", note: "只存使用者的 OpenAI 金鑰" }] },
@@ -195,7 +195,7 @@ const allProjects: Project[] = [
       roi: ["使用者自備金鑰，平台 AI 成本為 0", "後台追蹤每場 token 成本與「開始 → 完成 → 下載」漏斗，作為訂價依據"],
       api: "OpenAI Responses API，金鑰由 X-OpenAI-Key 標頭帶入、用完即丟；輸出用 json_schema strict 模式",
       tools: "OpenAI 內建 web_search 工具：模型自行決定搜尋關鍵字找面經（未使用 MCP）",
-      state: "setup → interview → report 三階段；每題的分數與改寫存在練習紀錄",
+      state: "setup → interview → report 三階段；對話保存在前端，每次請求帶上完整紀錄，伺服器不記住面試狀態",
       edges: ["web_search 失敗：改用同產業資料出題，流程不中斷", "401／429 轉成看得懂的提示，開始前先驗證金鑰"],
     },
     pm: {
@@ -247,7 +247,7 @@ const allProjects: Project[] = [
       architecture: [
         { name: "前端", detail: "面試流程在同一頁用三階段狀態切換（設定、進行中、報告），避免換頁時遺失作答內容。" },
         { name: "AI", detail: "OpenAI Responses API，出題時開啟 web_search 工具，讓模型自行決定搜尋關鍵字。" },
-        { name: "資料", detail: "MongoDB Atlas，練習紀錄、用量事件、系統設定、管理日誌、使用者建議分開存放。" },
+        { name: "資料", detail: "MongoDB Atlas，會員、用量事件、系統設定、管理日誌分開存放；面試內容不存進資料庫，練習紀錄的資料表已定義、留待歷史紀錄功能使用。" },
         { name: "驗證", detail: "Google OAuth，JWT 放在 HTTP-only cookie；後台分 user、support（唯讀）、admin 三種角色。" },
         { name: "部署", detail: "Vercel，正式環境與本機使用不同的 JWT_SECRET，擁有者帳號不能被降級或停權。" },
       ],
