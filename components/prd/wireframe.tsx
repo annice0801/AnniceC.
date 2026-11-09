@@ -112,8 +112,8 @@ function Block({ b }: { b: Wire }) {
             {b.logo ?? "LOGO"}
           </span>
           <span className="flex min-w-0 flex-1 flex-wrap justify-end gap-x-2 gap-y-0.5">
-            {b.items.map((it) => (
-              <span key={it} className={label} style={{ color: C.text }}>
+            {b.items.map((it, i) => (
+              <span key={i} className={label} style={{ color: C.text }}>
                 {it}
               </span>
             ))}
@@ -141,7 +141,7 @@ function Block({ b }: { b: Wire }) {
               {b.buttons && (
                 <div className={`mt-2 flex flex-wrap gap-1.5 ${b.align === "left" ? "" : "justify-center"}`}>
                   {b.buttons.map((x, i) => (
-                    <Btn key={x} label={x} primary={i === 0} />
+                    <Btn key={i} label={x} primary={i === 0} />
                   ))}
                 </div>
               )}
@@ -180,8 +180,8 @@ function Block({ b }: { b: Wire }) {
     case "cards":
       return (
         <Box n={b.n} className={`grid gap-1.5 ${{ 2: "grid-cols-2", 3: "grid-cols-2 sm:grid-cols-3", 4: "grid-cols-2 sm:grid-cols-4" }[b.cols ?? 3]}`}>
-          {b.items.map((it) => (
-            <div key={it} className="rounded-md border p-1.5" style={{ borderColor: C.line }}>
+          {b.items.map((it, i) => (
+            <div key={i} className="rounded-md border p-1.5" style={{ borderColor: C.line }}>
               {b.image && <Img label="圖" h="sm" />}
               <p className={`${b.image ? "mt-1" : ""} ${label} font-medium`} style={{ color: C.dark }}>
                 {it}
@@ -199,7 +199,7 @@ function Block({ b }: { b: Wire }) {
         <Box n={b.n} className="flex flex-wrap gap-1">
           {b.items.map((it, i) => (
             <span
-              key={it}
+              key={i}
               className="rounded-full border px-2 py-0.5 text-[10px]"
               style={i === b.active ? { background: C.dark, borderColor: C.dark, color: "white" } : { borderColor: C.line, color: C.text }}
             >
@@ -211,8 +211,8 @@ function Block({ b }: { b: Wire }) {
     case "list":
       return (
         <Box n={b.n} className="space-y-1">
-          {b.items.map((it) => (
-            <div key={it} className="flex items-center gap-1.5 rounded border px-1.5 py-1" style={{ borderColor: C.line }}>
+          {b.items.map((it, i) => (
+            <div key={i} className="flex items-center gap-1.5 rounded border px-1.5 py-1" style={{ borderColor: C.line }}>
               <span className="size-2.5 shrink-0 rounded-sm border" style={{ borderColor: C.dark, background: b.check ? C.fill : "transparent" }} />
               <span className={label} style={{ color: C.dark }}>
                 {it}
@@ -224,8 +224,8 @@ function Block({ b }: { b: Wire }) {
     case "form":
       return (
         <Box n={b.n} className="space-y-1.5 rounded-md border p-2" style={{ borderColor: C.line }}>
-          {b.fields.map((f) => (
-            <div key={f}>
+          {b.fields.map((f, i) => (
+            <div key={i}>
               <p className="mb-0.5 text-[9px]" style={{ color: C.text }}>
                 {f}
               </p>
@@ -241,15 +241,15 @@ function Block({ b }: { b: Wire }) {
       return (
         <Box n={b.n} className="flex flex-wrap gap-1.5">
           {b.items.map((x, i) => (
-            <Btn key={x} label={x} primary={i === 0} />
+            <Btn key={i} label={x} primary={i === 0} />
           ))}
         </Box>
       );
     case "stats":
       return (
         <Box n={b.n} className={`grid gap-1.5 ${b.items.length > 3 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3"}`}>
-          {b.items.map((it) => (
-            <div key={it} className="rounded-md border p-1.5" style={{ borderColor: C.line }}>
+          {b.items.map((it, i) => (
+            <div key={i} className="rounded-md border p-1.5" style={{ borderColor: C.line }}>
               <Bar w="45%" h={9} dark />
               <p className={`mt-1 ${label}`} style={{ color: C.text }}>
                 {it}
@@ -262,8 +262,8 @@ function Block({ b }: { b: Wire }) {
       return (
         <Box n={b.n} className="overflow-hidden rounded-md border" style={{ borderColor: C.line }}>
           <div className="grid gap-1 px-1.5 py-1" style={{ gridTemplateColumns: `repeat(${b.cols.length}, minmax(0,1fr))`, background: C.fill }}>
-            {b.cols.map((c) => (
-              <span key={c} className="truncate text-[9px] font-medium" style={{ color: C.dark }}>
+            {b.cols.map((c, i) => (
+              <span key={i} className="truncate text-[9px] font-medium" style={{ color: C.dark }}>
                 {c}
               </span>
             ))}
@@ -271,7 +271,7 @@ function Block({ b }: { b: Wire }) {
           {Array.from({ length: b.rows ?? 3 }, (_, r) => (
             <div key={r} className="grid gap-1 border-t px-1.5 py-1.5" style={{ gridTemplateColumns: `repeat(${b.cols.length}, minmax(0,1fr))`, borderColor: C.line }}>
               {b.cols.map((c, i) => (
-                <Bar key={c} w={i === 0 ? "80%" : "55%"} h={4} />
+                <Bar key={i} w={i === 0 ? "80%" : "55%"} h={4} />
               ))}
             </div>
           ))}
@@ -328,7 +328,7 @@ function Block({ b }: { b: Wire }) {
         <Box n={b.n} className="flex gap-0.5 border-b" style={{ borderColor: C.line }}>
           {b.items.map((it, i) => (
             <span
-              key={it}
+              key={i}
               className="rounded-t px-2 py-1 text-[10px]"
               style={i === (b.active ?? 0) ? { background: C.dark, color: "white" } : { color: C.text }}
             >
@@ -356,7 +356,7 @@ function Block({ b }: { b: Wire }) {
           <div className="flex gap-1 overflow-hidden rounded-md border p-1.5 sm:flex-col" style={{ borderColor: C.line, background: C.fill2 }}>
             {b.items.map((it, i) => (
               <span
-                key={it}
+                key={i}
                 className="shrink-0 truncate rounded px-1.5 py-1 text-[10px]"
                 style={i === (b.active ?? 0) ? { background: C.dark, color: "white" } : { color: C.text }}
               >
@@ -403,7 +403,7 @@ function Chart({ kind }: { kind: "radar" | "bar" | "line" | "donut" | "funnel" }
           <polygon points="60,14 78,22 82,40 60,48 40,40 38,24" fill={C.fill} stroke={C.dark} strokeWidth={1.2} />
         </>
       )}
-      {kind === "bar" && [10, 30, 50, 70, 90].map((x, i) => <rect key={x} x={x} y={56 - [30, 44, 22, 38, 16][i]} width="12" height={[30, 44, 22, 38, 16][i]} fill={C.line} />)}
+      {kind === "bar" && [10, 30, 50, 70, 90].map((x, i) => <rect key={i} x={x} y={56 - [30, 44, 22, 38, 16][i]} width="12" height={[30, 44, 22, 38, 16][i]} fill={C.line} />)}
       {kind === "line" && <polyline points="4,48 24,40 44,44 64,26 84,30 116,10" {...s} />}
       {kind === "donut" && (
         <>
