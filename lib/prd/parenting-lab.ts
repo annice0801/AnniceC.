@@ -3,7 +3,7 @@ import type { Prd } from "./types";
 // Parenting Lab 的 PRD：內容對應 parenting_lab（ann-tools）的程式碼
 export const parentingLabPrd: Prd = {
   slug: "parenting-lab",
-  version: "v1.0",
+  version: "v1.1",
   docStatus: "已上線・持續維護",
   revisions: [
     { version: "v0.1", date: "2026/09/17", type: "新增", summary: "「小狗回家」coding 遊戲與二項式積木，各用單一 HTML 檔做出可玩版本，驗證玩法。" },
@@ -11,6 +11,7 @@ export const parentingLabPrd: Prd = {
     { version: "v0.3", date: "2026/09/21", type: "新增", summary: "品牌官網首頁五個區塊、幼兒發展文章、3D 教具頁、Email 訂閱表單與暱稱歡迎。" },
     { version: "v0.4", date: "2026/09/23", type: "調整", summary: "導覽列與手機選單，所有作品都能從首頁進入。" },
     { version: "v1.0", date: "2026/09/24", type: "新增", summary: "品牌葉芽 icon，正式部署到 Vercel。" },
+    { version: "v1.1", date: "2026/11/09", type: "新增", summary: "家長幫手區：依年齡推薦節奏慢、內容正向的卡通與電影（附推薦集數），以及睡前聊天題目與抽卡。" },
   ],
   background: {
     context:
@@ -49,6 +50,9 @@ export const parentingLabPrd: Prd = {
     { id: "F-09", module: "互動教具", name: "二項式積木屋（3D）", desc: "Three.js 立方體，可以旋轉觀察，把積木拖進或點選放入淡色提示位置，可重新開始。", priority: "P0", status: "已上線", release: "v0.3" },
     { id: "F-10", module: "內容", name: "幼兒發展文章", desc: "總覽與 3–4、4–5、5–6 歲共 4 篇，每篇附可在家進行的活動。", priority: "P1", status: "已上線", release: "v0.3" },
     { id: "F-11", module: "全站", name: "導覽與手機選單", desc: "錨點導覽（關於我們、我們的理念）與作品入口，手機改為漢堡選單。", priority: "P0", status: "已上線", release: "v0.4" },
+    { id: "F-14", module: "家長幫手", name: "選片原則", desc: "依 WHO、美國兒科學會與國民健康署的建議，整理每天時間、節奏、陪看、內容與睡前五項原則，附參考資料。", priority: "P1", status: "已上線", release: "v1.1" },
+    { id: "F-15", module: "家長幫手", name: "適齡卡通與電影", desc: "依 3–4、4–5、5–6 歲切換，列出片長、推薦原因、推薦集數或主題、看完可以聊的問題與緊張場景提醒；另列「可以等大一點再看」。", priority: "P0", status: "已上線", release: "v1.1" },
+    { id: "F-16", module: "家長幫手", name: "睡前聊天卡", desc: "依年齡提供聊天重點、技巧與 6 張題目卡，可以隨機抽一張（不會連續抽到同一張）。", priority: "P1", status: "已上線", release: "v1.1" },
     { id: "F-12", module: "會員互動", name: "訂閱名單存到後端", desc: "名單改存資料庫，才能真正寄送通知。", priority: "P1", status: "規劃中", release: "—" },
     { id: "F-13", module: "內容", name: "文章搜尋與分類", desc: "文章變多後依年齡與主題篩選。", priority: "P2", status: "規劃中", release: "—" },
   ],
@@ -70,6 +74,10 @@ export const parentingLabPrd: Prd = {
       {
         label: "幼兒發展文章 /blog",
         children: [{ label: "發展總覽" }, { label: "3–4 歲" }, { label: "4–5 歲" }, { label: "5–6 歲" }],
+      },
+      {
+        label: "家長幫手 /helper",
+        children: [{ label: "選片五原則" }, { label: "年齡分頁", children: [{ label: "推薦卡通與電影" }, { label: "睡前聊天卡" }] }, { label: "可以等大一點再看" }, { label: "參考資料" }],
       },
       {
         label: "全站元件",
@@ -126,6 +134,21 @@ export const parentingLabPrd: Prd = {
         { kind: "end", text: "回到遊戲模式" },
       ],
       exceptions: ["改壞了可按「🔄 恢復預設關卡」", "預設關卡用固定種子產生，保證有路可走"],
+    },
+    {
+      id: "FL-04",
+      title: "睡前挑一部片、聊一聊",
+      goal: "家長快速找到適合孩子年齡的內容，並把看完的時間變成對話",
+      steps: [
+        { kind: "start", text: "從導覽列進入家長幫手" },
+        { kind: "action", actor: "家長", text: "看選片五原則" },
+        { kind: "action", actor: "家長", text: "選孩子的年齡（3–4／4–5／5–6 歲）" },
+        { kind: "decision", text: "有適合的作品？", yes: "看推薦集數、片長與提醒", no: "參考「可以等大一點再看」的原因" },
+        { kind: "action", actor: "家長", text: "和孩子一起看一集，看完問「看完可以聊」的問題" },
+        { kind: "action", actor: "家長", text: "睡前按「抽一張聊天卡」" },
+        { kind: "end", text: "聊 5 到 10 分鐘後入睡" },
+      ],
+      exceptions: ["切換年齡時聊天卡會重新開始", "片長為約略時間，集數以英文原名標示"],
     },
   ],
   pages: [
@@ -216,6 +239,26 @@ export const parentingLabPrd: Prd = {
         { n: 2, text: "每篇都以可執行的活動收尾，而不是只有知識。" },
       ],
     },
+    {
+      id: "P-05",
+      name: "家長幫手",
+      route: "/helper",
+      device: "mobile",
+      purpose: "依孩子年齡快速找到適合的卡通電影與睡前聊天題目。",
+      wire: [
+        { t: "heading", text: "🧸 家長幫手" },
+        { t: "cards", items: ["每天不超過 1 小時", "挑節奏慢的", "一起看、一起聊", "內容正向"], cols: 2, n: 1 },
+        { t: "chips", items: ["3–4 歲", "4–5 歲", "5–6 歲"], active: 1, n: 2 },
+        { t: "panel", title: "妙妙犬布麗・每集約 7 分鐘", content: [{ t: "list", items: ["Keepy Uppy S1", "Takeaway S1", "Sleepytime S2"] }, { t: "text", lines: 1 }], n: 3 },
+        { t: "panel", title: "「今天的玫瑰和刺是什麼？」", dashed: true, content: [{ t: "buttons", items: ["🔄 換一張"] }], n: 4 },
+      ],
+      notes: [
+        { n: 1, text: "先說明選片原則，並附參考資料，讓家長知道推薦的依據。" },
+        { n: 2, text: "年齡分頁固定在畫面上方，捲動時也能切換。" },
+        { n: 3, text: "每部作品列出推薦集數、看完可以聊的問題；有緊張場景時加上提醒。" },
+        { n: 4, text: "抽卡不會連續抽到同一張；下方也列出全部題目。" },
+      ],
+    },
   ],
   style: {
     keywords: ["溫暖", "柔和", "安心", "手作感", "大地色"],
@@ -254,6 +297,7 @@ export const parentingLabPrd: Prd = {
       { name: "訂閱名單", desc: "localStorage", fields: "Email 陣列" },
       { name: "自訂關卡", desc: "localStorage：dog-game-levels-v2", fields: "每關的棋盤大小、起點、終點、障礙物" },
       { name: "文章", desc: "程式內的靜態資料（data/blog-posts.ts）", fields: "slug、標題、段落、活動" },
+      { name: "家長幫手內容", desc: "程式內的靜態資料（data/parent-helper.ts）", fields: "年齡、作品、片長、推薦集數、聊天題目" },
     ],
     apis: [],
   },

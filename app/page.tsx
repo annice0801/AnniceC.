@@ -232,15 +232,15 @@ export default function Home() {
   );
 }
 
-// 甘特圖：2026/09/15 到 11/01，實心為製作期、斜線為維護期（深色後台樣式）
+// 甘特圖：2026/09/15 到 11/15，實心為製作期、斜線為維護期（深色後台樣式）
 function Gantt() {
   const start = new Date("2026-09-15").getTime();
-  const total = 47;
+  const total = 61;
   const pos = (d: string) => ((new Date(d).getTime() - start) / 86400000 / total) * 100;
-  // 期間文字「2026/09/23 – 2026/09/24」轉成起訖日期；「開發中」畫到 11/01
+  // 期間文字「2026/09/23 – 2026/09/24」轉成起訖日期；「開發中」畫到圖表最右邊
   const range = (period: string): [string, string] => {
     const [a, b] = period.split("–").map((x) => x.trim().replaceAll("/", "-"));
-    const end = /^\d/.test(b) ? new Date(new Date(b).getTime() + 86400000).toISOString().slice(0, 10) : "2026-11-01";
+    const end = /^\d/.test(b) ? new Date(new Date(b).getTime() + 86400000).toISOString().slice(0, 10) : "2026-11-15";
     return [a, end];
   };
   const months = [
@@ -248,6 +248,7 @@ function Gantt() {
     { label: "10/01", at: "2026-10-01" },
     { label: "10/15", at: "2026-10-15" },
     { label: "11/01", at: "2026-11-01" },
+    { label: "11/15", at: "2026-11-15" },
   ];
   return (
     <div className="min-w-[560px] rounded-lg border border-[#2b2f36] bg-[#1b1f26] p-5">
